@@ -1,0 +1,17 @@
+<appian-plugin name="Hello World" key="com.hello.world.plugins">
+
+	<plugin-info>
+		<description>Hello World</description>
+		<version>1.0</version>
+		<bundle-instructions>
+			<Bundle-Activator>com.hello.world.plugins.Activator
+			</Bundle-Activator>
+		</bundle-instructions>
+	</plugin-info>
+	<!-- Hello World Plugin -->
+	<smart-service name="Insert Into Hello World Table" key="helloWorldInsertSmartService"
+		class="com.hello.world.HelloWorldInsertSmartService" />
+	<smart-service name="Remove From Hello World" key="helloWorldRemoveSmartService"
+		class="com.hello.world.HelloWorldRemoveSmartService" />
+
+</appian-plugin>

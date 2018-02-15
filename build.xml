@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cloud Plug-ins" default="install" basedir=".">
+	<xmlproperty file="./appian-plugin.xml"/>
+
+	<target name="-find-classpath-env-variable">
+		<property environment="env"/>
+		<condition property="appian-jars" value="${env.CLOUD_CLASSPATH}">
+			<isset property="env.CLOUD_CLASSPATH"/>
+		</condition>
+	</target>
+
+	<target name="-request-classpath" depends="-find-classpath-env-variable" unless="appian-jars">
+		<echo>Cannot find environment variable CLOUD_CLASSPATH. Provide classpath below.</echo>
+		<input message="What's your compilation classpath? (e.g. C:\appian\ear\suite.ear\lib) :" addproperty="appian-jars"/>
+	</target>
+
+	<target name="install" depends="-request-classpath">
+		<delete dir="output" failonerror="false"/>
+		<mkdir dir="output"/>
+		<path id="plugins.classpath">
+			<fileset dir="./META-INF/lib">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${appian-jars}">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<javac classpathref="plugins.classpath"
+			debug="on" 
+			destdir="output" 
+			failonerror="true"
+			fork="yes" 
+			includeAntRuntime="false" 
+			memoryMaximumSize="512m" 
+			nowarn="true" 
+			srcdir="src" 
+			target="1.8" 
+			excludes="test/**,com/appiancorp/a2/unittesting/**"/>
+			<jar destfile="ec2.jar">
+				<fileset dir="src" excludes="**/*.java, test/**, com/appiancorp/a2/unittesting/**"/>
+				<fileset dir="output"/>
+				<fileset dir="." includes="META-INF/lib/*,appian-plugin.xml"/>
+			</jar>
+			<delete dir="output" failonerror="false"/>
+		</target>
+	</project>

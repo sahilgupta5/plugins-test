@@ -1,0 +1,30 @@
+{
+	"testDefaultProperties": {
+		"TEST_DATABASE_CONNECTION_STRING": "jdbc:mysql://localhost:3306/",
+		"HELLO_WORLD_DB": "HelloWorld",
+		"USR": "root",
+		"PWD": "password"
+	},
+	"a2customers": {
+		"createTable": [
+			"CREATE TABLE IF NOT EXISTS `a2customers` (",
+			"`customerId` int(11) NOT NULL AUTO_INCREMENT, `companyName` varchar(100) NOT NULL,",
+			"`contactEmail` varchar(100) NOT NULL, `contactFirstName` varchar(100) NOT NULL,",
+			" `contactLastName` varchar(100) NOT NULL, `contactPhone` varchar(100) NOT NULL,",
+			" `jobTitle` varchar(100) DEFAULT NULL,",
+			" `country` varchar(100) NOT NULL, `siteApproval` varchar(100) NOT NULL,",
+			" `timeCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'timeRequestWasSubmitted',",
+			" `subdomain` varchar(100) NOT NULL, `timeDecided` datetime DEFAULT NULL,",
+			" `language` varchar(10) DEFAULT NULL,",
+			" `region` tinyint(4) DEFAULT NULL COMMENT '0 for N. VA, 1 for EU, 3 for Cali, 5 for AUS',",
+			" `customerStatus` tinyint(4) DEFAULT NULL COMMENT '0 for inactive customer, 1 for active customer, 2 for internal site',",
+			" `serverSize` varchar(20) DEFAULT NULL, `volumeSize` int(11) DEFAULT NULL COMMENT 'size in GB',",
+			" `domain` varchar(100) DEFAULT 'appiancloud.com',",
+			" `customerName` varchar(100) DEFAULT NULL COMMENT 'Name of the company only',",
+			" `customerTableId` int(11) DEFAULT NULL, ",
+			" `is_byok` TINYINT NOT NULL DEFAULT '0',",
+			" PRIMARY KEY(`customerId`));"
+		]
+	}
+}
+
