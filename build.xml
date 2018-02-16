@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Cloud Plug-ins" default="install" basedir=".">
+<project name="Hello World Plug-ins" default="install" basedir=".">
 	<xmlproperty file="./appian-plugin.xml"/>
 
 	<target name="-find-classpath-env-variable">
 		<property environment="env"/>
-		<condition property="appian-jars" value="${env.CLOUD_CLASSPATH}">
-			<isset property="env.CLOUD_CLASSPATH"/>
+		<condition property="appian-jars" value="${env.HELLO_SS_CLASSPATH}">
+			<isset property="env.HELLO_SS_CLASSPATH"/>
 		</condition>
 	</target>
 
 	<target name="-request-classpath" depends="-find-classpath-env-variable" unless="appian-jars">
-		<echo>Cannot find environment variable CLOUD_CLASSPATH. Provide classpath below.</echo>
+		<echo>Cannot find environment variable HELLO_SS_CLASSPATH. Provide classpath below.</echo>
 		<input message="What's your compilation classpath? (e.g. C:\appian\ear\suite.ear\lib) :" addproperty="appian-jars"/>
 	</target>
 
@@ -35,9 +35,9 @@
 			nowarn="true" 
 			srcdir="src" 
 			target="1.8" 
-			excludes="test/**,com/appiancorp/a2/unittesting/**"/>
+			excludes="test/**"/>
 			<jar destfile="ec2.jar">
-				<fileset dir="src" excludes="**/*.java, test/**, com/appiancorp/a2/unittesting/**"/>
+				<fileset dir="src" excludes="**/*.java, test/**"/>
 				<fileset dir="output"/>
 				<fileset dir="." includes="META-INF/lib/*,appian-plugin.xml"/>
 			</jar>
