@@ -10,7 +10,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hello.world.MockObjectsFactory;
+//import com.hello.world.MockObjectsFactory;
 
 public class DBConnectionPoolHelper {
   
@@ -19,6 +19,7 @@ public class DBConnectionPoolHelper {
   private static final String DEFAULT_VALUES_PROPERTIES_FILE = "com/hello/world/plugins/TestDefaultProperties.json";
   private static JsonNode DEFAULT_PROPERTIES;
 
+  /*
   static {
     if (DEFAULT_PROPERTIES == null) {
       try {
@@ -28,7 +29,7 @@ public class DBConnectionPoolHelper {
         e.printStackTrace();
       }
     }
-  }
+  }*/
 
   public static synchronized void start() throws Exception {
     if(connectionPool == null) {
@@ -36,8 +37,8 @@ public class DBConnectionPoolHelper {
       connectionPool.setDriverClassName("com.mysql.jdbc.Driver");
       connectionPool.setMaxTotal(20);
       connectionPool.setMaxIdle(5);
-      connectionPool.setUsername(MockObjectsFactory.getDefaultProperty("USR"));
-      connectionPool.setPassword(MockObjectsFactory.getDefaultProperty("PWD"));
+      connectionPool.setUsername("user");
+      connectionPool.setPassword("password");
       connectionPool.setUrl(MANAGER_LOCAL_DATABASE_URL);
     }
   }
@@ -55,7 +56,8 @@ public class DBConnectionPoolHelper {
     
     return connectionPool.getConnection();
   }
-  
+ 
+  /*
   private static JsonNode getDefaultProperties() throws FileNotFoundException {       
     try (InputStream defaultProperties = MockObjectsFactory.class.getClassLoader().getResourceAsStream(DEFAULT_VALUES_PROPERTIES_FILE)) {      
     
@@ -65,6 +67,6 @@ public class DBConnectionPoolHelper {
     } catch (IOException e) {
         throw new FileNotFoundException("Cannot find default unit test properties file: " + DEFAULT_VALUES_PROPERTIES_FILE);
     }    
-  }
+  }*/
 
 }
