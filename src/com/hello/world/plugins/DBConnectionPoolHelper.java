@@ -7,7 +7,7 @@ import java.sql.Connection;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import com.appiancorp.suiteapi.cfg.ConfigurationLoader;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.MockObjectsFactory;
@@ -15,7 +15,7 @@ import com.hello.world.MockObjectsFactory;
 public class DBConnectionPoolHelper {
   
   private static BasicDataSource connectionPool = null;
-  public static final String MANAGER_LOCAL_DATABASE_URL = (ConfigurationLoader.getConfiguration().getServerAndPort().equals("managerdev.appiancloud.com")) ? "jdbc:mysql://localhost:3306/Appian" : "jdbc:mysql://localhost:3306/AppianAnywhere";
+  public static final String MANAGER_LOCAL_DATABASE_URL = "jdbc:mysql://localhost:3306/AppianAnywhere";
   private static final String DEFAULT_VALUES_PROPERTIES_FILE = "com/hello/world/plugins/TestDefaultProperties.json";
   private static JsonNode DEFAULT_PROPERTIES;
 
