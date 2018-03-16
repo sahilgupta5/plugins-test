@@ -1,0 +1,18 @@
+{
+		"testDefaultProperties":
+		{	
+			"TEST_DATABASE_CONNECTION_STRING":"jdbc:mysql://localhost:3306/",								
+			"HELLO_WORLD_DB":"HelloWorldDB",
+			"USR":"root",
+			"PWD":"password"	
+		},		
+		"helloWorldTable": {
+			"createTable": [
+				"CREATE TABLE IF NOT EXISTS `helloWorldTable` (",
+				"`id` int(11) NOT NULL AUTO_INCREMENT,",
+				"`name` VARCHAR(20),",
+				" PRIMARY KEY(`id`)",
+				") ENGINE=InnoDB;"
+			]
+		}
+}

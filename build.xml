@@ -36,7 +36,7 @@
 			srcdir="src" 
 			target="1.8" 
 			excludes="test/**"/>
-			<jar destfile="ec2.jar">
+			<jar destfile="helloWorldPlugin.jar">
 				<fileset dir="src" excludes="**/*.java, test/**"/>
 				<fileset dir="output"/>
 				<fileset dir="." includes="META-INF/lib/*,appian-plugin.xml"/>

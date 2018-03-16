@@ -13,8 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public abstract class MockObjectsFactory {
-  private static final String TEST_DEFAULT_VALUES_PROPERTIES_FILE = "com/hello/world/plugins/TestDefaultProperties.json";
+  private static final String TEST_DEFAULT_VALUES_PROPERTIES_FILE = "TestDefaultProperties.json";
   private static JsonNode TEST_DEFAULT_PROPERTIES;
+  private static final String HELLO_WORLD_DB_NAME_PROPERTY = "HELLO_WORLD_DB";
   private static final String TEST_DATABASE_CONNECTION_STRING_PROPERTY = "TEST_DATABASE_CONNECTION_STRING";
   protected static final boolean SUCCESS = true;
   protected static final int DEFAULT_REGION = 1; 
@@ -34,10 +35,12 @@ public abstract class MockObjectsFactory {
     }
   }
 
-  private static JsonNode getTestDefaultProperties() throws FileNotFoundException {       
+  private static JsonNode getTestDefaultProperties() throws FileNotFoundException {
     
-    try (InputStream testDefaultProperties = MockObjectsFactory.class.getClassLoader().getResourceAsStream(TEST_DEFAULT_VALUES_PROPERTIES_FILE)) {      
-    
+    String mockObjectFactoryPackage = MockObjectsFactory.class.getPackage().getName().replaceAll("\\.", "/");
+    String propertiesLocation =  mockObjectFactoryPackage + "/" + TEST_DEFAULT_VALUES_PROPERTIES_FILE;
+
+    try (InputStream testDefaultProperties = MockObjectsFactory.class.getClassLoader().getResourceAsStream(propertiesLocation)) {      
       ObjectMapper jsonObjectMapper = new ObjectMapper();      
       return jsonObjectMapper.readTree(testDefaultProperties);                 
     
@@ -52,6 +55,11 @@ public abstract class MockObjectsFactory {
       return propertyValue.textValue();
     }
     return null;
+  }
+  
+  public static Connection getHelloWorldDBMockConnection() throws Exception {
+    String testDBconnectionString = getDefaultProperty(TEST_DATABASE_CONNECTION_STRING_PROPERTY) + getDefaultProperty(HELLO_WORLD_DB_NAME_PROPERTY);
+    return getTestDatabaseConnection(testDBconnectionString, getDefaultProperty("USR"), getDefaultProperty("PWD"));
   }
 
   public static Connection getDefaultTestDatabaseConnection() throws Exception {
