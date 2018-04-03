@@ -4,13 +4,13 @@
 
 	<target name="-find-classpath-env-variable">
 		<property environment="env"/>
-		<condition property="appian-jars" value="${env.HELLO_SS_CLASSPATH}">
-			<isset property="env.HELLO_SS_CLASSPATH"/>
+		<condition property="appian-jars" value="${env.APPIAN_CLASSPATH}">
+			<isset property="env.APPIAN_CLASSPATH"/>
 		</condition>
 	</target>
 
 	<target name="-request-classpath" depends="-find-classpath-env-variable" unless="appian-jars">
-		<echo>Cannot find environment variable HELLO_SS_CLASSPATH. Provide classpath below.</echo>
+		<echo>Cannot find environment variable APPIAN_CLASSPATH. Provide classpath below.</echo>
 		<input message="What's your compilation classpath? (e.g. C:\appian\ear\suite.ear\lib) :" addproperty="appian-jars"/>
 	</target>
 
