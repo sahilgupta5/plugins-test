@@ -8,7 +8,7 @@ pipeline {
             }
 
             steps {
-            	ckeckout scm
+            	//ckeckout scm
             	echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Building..'
                 sh 'ant'
