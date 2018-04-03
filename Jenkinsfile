@@ -12,7 +12,7 @@ pipeline {
             	echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Building..'
                 sh 'ant'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: '*.jar', fingerprint: true
                 
             }
         }
