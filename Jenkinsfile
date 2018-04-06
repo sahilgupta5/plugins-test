@@ -1,19 +1,15 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             environment{
                 APPIAN_CLASSPATH = '/usr/local/appian/ear/suite.ear/lib'
             }
-
-            steps {
-            	//ckeckout scm
+			steps {
             	echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Building..'
                 sh 'ant'
-                archiveArtifacts artifacts: '*.jar', fingerprint: true
-                
+          		archiveArtifacts artifacts: '*.jar', fingerprint: true
             }
         }
         stage('Test') {

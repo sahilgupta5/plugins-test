@@ -29,7 +29,6 @@ public class HelloWorldInsertSmartService extends AppianSmartService {
         HelloWorldObject object = new HelloWorldObject();
         object.setName(name);
         HelloWorldSmartServiceDAO.insertHelloWorldInstance(object, connection);
-        System.out.println("Hello");
       }
     } catch (Exception e) {
       throw new SmartServiceException.Builder(getClass(), e).userMessage("error.exception", e.getMessage()).build();
